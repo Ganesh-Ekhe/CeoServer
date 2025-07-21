@@ -1,9 +1,9 @@
-
-
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUser } from "../context/UserContext";
+
+const backendUrl = import.meta.env.VITE_API_URL;
 
 const ApplicationForm = () => {
   const { serviceId } = useParams();
@@ -20,7 +20,7 @@ const ApplicationForm = () => {
     if (user?.token) {
       const headers = { Authorization: `Bearer ${user.token}` };
 
-      axios.get("http://localhost:5000/api/users/me", { headers })
+      axios.get(`${backendUrl}/api/users/me`, { headers })
         .then(res => setUserCaste(res.data.caste || "General"))
         .catch(err => console.error("Error fetching user caste:", err));
     }
@@ -30,7 +30,7 @@ const ApplicationForm = () => {
     if (user?.token && userCaste) {
       const headers = { Authorization: `Bearer ${user.token}` };
 
-      axios.get("http://localhost:5000/api/services", { headers })
+      axios.get(`${backendUrl}/api/services`, { headers })
         .then(res => {
           setServices(res.data);
           if (serviceId) handleServiceChange(serviceId, res.data, userCaste);
@@ -56,7 +56,7 @@ const ApplicationForm = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:5000/api/applications", {
+      await axios.post(`${backendUrl}/api/applications`, {
         serviceId: selectedService,
         userId: user.id
       }, {

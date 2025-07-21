@@ -17,28 +17,29 @@ const AuthPage = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const url = isLogin
-        ? "http://localhost:5000/api/auth/login"
-        : "http://localhost:5000/api/auth/register";
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const url = isLogin
+      ? `${import.meta.env.VITE_API_BASE_URL}/api/auth/login`
+      : `${import.meta.env.VITE_API_BASE_URL}/api/auth/register`;
 
-      const res = await axios.post(url, form);
-      if (isLogin) {
-        login(res.data);
-        if (res.data.user.role === "admin") navigate("/admin");
-        else if (res.data.user.role === "operator") navigate("/operator");
-        else navigate("/user");
-        window.location.reload();
-      } else {
-        alert("Signup successful! You can now login.");
-        setIsLogin(true);
-      }
-    } catch (err) {
-      alert(err.response?.data?.message || "Something went wrong");
+    const res = await axios.post(url, form);
+    if (isLogin) {
+      login(res.data);
+      if (res.data.user.role === "admin") navigate("/admin");
+      else if (res.data.user.role === "operator") navigate("/operator");
+      else navigate("/user");
+      window.location.reload();
+    } else {
+      alert("Signup successful! You can now login.");
+      setIsLogin(true);
     }
-  };
+  } catch (err) {
+    alert(err.response?.data?.message || "Something went wrong");
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-pink-200 to-orange-100">

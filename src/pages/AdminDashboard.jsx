@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useUser } from "../context/UserContext";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://ceobackend.onrender.com";
+
 
 function AdminPanel() {
   const { user } = useUser();
@@ -248,7 +249,7 @@ function AdminPanel() {
           className="border rounded overflow-hidden shadow relative"
         >
           <img
-            src={`http://localhost:5000/api/files/${slide.image?.filename}`}
+            src={`${BASE_URL}/api/files/${slide.image?.filename}`}
             alt={slide.title}
             className="w-full h-[180px] object-cover"
           />
@@ -373,7 +374,7 @@ function AdminPanel() {
 
                       {app.certificateUrl && (
                         <a
-                          href={`http://localhost:5000${app.certificateUrl}`}
+                          href={`${BASE_URL}${app.certificateUrl}`}
                           target="_blank"
                           rel="noreferrer"
                           className="text-blue-500 underline mt-1 block"

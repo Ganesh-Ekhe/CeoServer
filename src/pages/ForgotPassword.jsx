@@ -1,5 +1,3 @@
-
-
 import { useState } from "react";
 import axios from "axios";
 
@@ -9,9 +7,11 @@ const ForgotPassword = () => {
   const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
+  const API_URL = import.meta.env.VITE_BACKEND_URL;
+
   const sendOtp = async () => {
     try {
-      await axios.post("http://localhost:5000/api/auth/send-otp", { mobile });
+      await axios.post(`${API_URL}/api/auth/send-otp`, { mobile });
       alert("OTP sent");
       setStep(2);
     } catch (err) {
@@ -21,7 +21,7 @@ const ForgotPassword = () => {
 
   const resetPassword = async () => {
     try {
-      await axios.post("http://localhost:5000/api/auth/reset-password", {
+      await axios.post(`${API_URL}/api/auth/reset-password`, {
         mobile,
         otp,
         newPassword,
@@ -89,4 +89,3 @@ const ForgotPassword = () => {
 };
 
 export default ForgotPassword;
-

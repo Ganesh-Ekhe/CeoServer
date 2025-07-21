@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useUser } from "../context/UserContext";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://ceobackend.onrender.com";
 
 const OperatorPanel = () => {
   const { user } = useUser();
@@ -249,54 +249,7 @@ const OperatorPanel = () => {
         </div>
       )}
 
-      {/* {showProfileModal && selectedProfile && (
-  <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-    <div className="bg-white p-6 rounded-xl shadow-lg max-w-lg w-full relative">
-      <button
-        onClick={closeProfile}
-        className="absolute top-2 right-3 text-gray-600 hover:text-red-600 text-2xl font-bold"
-        aria-label="Close profile modal"
-      >
-        ×
-      </button>
-
-      <h3 className="text-2xl font-bold mb-4 text-indigo-700">👤 User Profile</h3>
-
-      <div className="space-y-2 text-gray-800 text-base">
-        <p><strong>Name:</strong> {selectedProfile.name || "N/A"}</p>
-        <p><strong>Gender:</strong> {selectedProfile.gender || "N/A"}</p>
-        <p>
-          <strong>DOB:</strong>{" "}
-          {selectedProfile.dob
-            ? new Date(selectedProfile.dob).toLocaleDateString()
-            : "N/A"}
-        </p>
-        <p><strong>Caste:</strong> {selectedProfile.caste || "N/A"}</p>
-      </div>
-
-      <div className="mt-6">
-        <h4 className="text-lg font-semibold text-pink-700 mb-3">📄 Profile Documents</h4>
-
-       {selectedProfile?.profileDocs?.map((doc, idx) => (
-  <div key={idx} className="bg-gradient-to-r from-purple-100 to-pink-100 p-3 rounded-lg shadow mb-2">
-    <div className="flex justify-between items-center">
-      <span className="font-medium text-gray-800">{doc.docName}</span>
-      <a
-        href={`http://localhost:5000/api/files/${doc.filename}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-indigo-600 underline text-sm hover:text-pink-600"
-      >
-        View
-      </a>
-    </div>
-  </div>
-))}
-
-      </div>
-    </div>
-  </div>
-)} */}
+      
 {showProfileModal && selectedProfile && (
   <div className="fixed inset-0 bg-gradient-to-br from-black via-gray-800 to-black bg-opacity-80 flex items-center justify-center z-50 backdrop-blur-sm">
     <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-xl w-full relative border border-indigo-200 hover:shadow-pink-200 transition-shadow duration-300 ease-in-out">
@@ -344,7 +297,7 @@ const OperatorPanel = () => {
                   {doc.docName}
                 </span>
                 <a
-                  href={`http://localhost:5000/api/files/${doc.filename}`}
+                  href={`https://ceobackend.onrender.com;/api/files/${doc.filename}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-indigo-600 hover:text-pink-600 underline text-sm font-medium transition duration-200"

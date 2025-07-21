@@ -12,7 +12,7 @@ const UserDashboard = () => {
   const [corrections, setCorrections] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const FILE_URL = "http://localhost:5000/api/files/";
+  const FILE_URL = "https://ceoserver.onrender.com/api/files/";
 
   useEffect(() => {
     if (user?.token) {
@@ -23,7 +23,7 @@ const UserDashboard = () => {
   const fetchApps = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/api/applications/user", {
+      const res = await axios.get("https://ceoserver.onrender.com/api/applications/user", {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       setApplications(res.data.reverse()); // 👈 Reversing inline
@@ -37,7 +37,7 @@ const UserDashboard = () => {
   const handleConfirm = async (appId) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/applications/${appId}/confirm`,
+        `https://ceoserver.onrender.com/api/applications/${appId}/confirm`,
         {},
         { headers: { Authorization: `Bearer ${user.token}` } }
       );
@@ -62,7 +62,7 @@ const UserDashboard = () => {
 
     try {
       await axios.put(
-        `http://localhost:5000/api/applications/${appId}/correction`,
+        `https://ceoserver.onrender.com/api/applications/${appId}/correction`,
         { comment: reason },
         { headers: { Authorization: `Bearer ${user.token}` } }
       );
