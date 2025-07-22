@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -10,7 +8,7 @@ const ServicesSection = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/services");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/services`);
         setServices(res.data);
       } catch (err) {
         console.error("Failed to fetch services:", err);
@@ -38,8 +36,6 @@ const ServicesSection = () => {
                 key={service._id}
                 className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl hover:scale-105 transform transition duration-300 group relative overflow-hidden"
               >
-                
-
                 <h3 className="text-lg font-bold text-indigo-700 mb-2">{service.name}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">
                   {service.description || `Apply for ${service.name} service online.`}

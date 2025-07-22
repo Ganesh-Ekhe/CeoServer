@@ -1,14 +1,14 @@
-
-
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const BASE_URL = import.meta.env.VITE_BACKEND_URL ||"https://ceoserver.onrender.com";
+// Use .env variable or fallback if not available
+const BASE_URL = import.meta.env.VITE_BACKEND_URL || "https://ceoserver.onrender.com";
 
 const HeroSlider = () => {
   const [slides, setSlides] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Fetch slides on component mount
   useEffect(() => {
     fetchSlides();
   }, []);
@@ -22,6 +22,7 @@ const HeroSlider = () => {
     }
   };
 
+  // Auto-slide every 4 seconds
   useEffect(() => {
     if (slides.length > 0) {
       const interval = setInterval(() => {
@@ -40,9 +41,9 @@ const HeroSlider = () => {
   }
 
   const currentSlide = slides[currentIndex];
-  const imageURL = currentSlide.image?.filename
+  const imageURL = currentSlide?.image?.filename
     ? `${BASE_URL}/api/files/${currentSlide.image.filename}`
-    : "/default-slide.jpg"; // fallback
+    : "/default-slide.jpg"; // fallback image if not present
 
   return (
     <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden rounded-b-3xl shadow-2xl">

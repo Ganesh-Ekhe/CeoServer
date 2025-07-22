@@ -1,6 +1,3 @@
-
-
-
 // src/components/Signup.jsx
 import { useState } from "react";
 import axios from "axios";
@@ -19,6 +16,8 @@ const Signup = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const API = import.meta.env.VITE_API_URL;
 
   const validate = () => {
     const errs = {};
@@ -52,7 +51,7 @@ const Signup = () => {
 
     try {
       setLoading(true);
-      await axios.post("https://ceoserver.onrender.com/api/auth/signup", form);
+      await axios.post(`${API}/api/auth/signup`, form);
       alert("✅ Registration Successful! Please login.");
       navigate("/login");
     } catch (err) {

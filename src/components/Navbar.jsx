@@ -1,5 +1,3 @@
-
-
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 import { useState } from "react";
@@ -51,133 +49,134 @@ const Navbar = () => {
 };
 
 // 👇 NavLinks Component (for reuse in Desktop & Mobile)
-const NavLinks = ({ user, handleLogout, setIsOpen }) => (
-  <>
-    <li>
-      <NavLink
-        to="/"
-        onClick={() => setIsOpen && setIsOpen(false)}
-        className={({ isActive }) => (isActive ? "underline font-semibold" : "")}
-      >
-        Home
-      </NavLink>
-    </li>
+const NavLinks = ({ user, handleLogout, setIsOpen }) => {
+  const BASE_URL = import.meta.env.VITE_API_URL;
 
-    {!user && (
-      <>
-        <li>
-          <NavLink
-            to="/login"
-            onClick={() => setIsOpen && setIsOpen(false)}
-            className={({ isActive }) => (isActive ? "underline font-semibold" : "")}
-          >
-            Login
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/signup"
-            onClick={() => setIsOpen && setIsOpen(false)}
-            className={({ isActive }) => (isActive ? "underline font-semibold" : "")}
-          >
-            Signup
-          </NavLink>
-        </li>
-      </>
-    )}
-
-    {user && user.role === "user" && (
-      <>
-        <li>
-          <NavLink
-            to="/user/dashboard"
-            onClick={() => setIsOpen && setIsOpen(false)}
-            className={({ isActive }) => (isActive ? "underline font-semibold" : "")}
-          >
-            Dashboard
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/application-form"
-            onClick={() => setIsOpen && setIsOpen(false)}
-            className={({ isActive }) => (isActive ? "underline font-semibold" : "")}
-          >
-            Apply Service
-          </NavLink>
-        </li>
-      </>
-    )}
-
-    {user && user.role === "admin" && (
-      <>
-        <li>
-          <NavLink
-            to="/admin"
-            onClick={() => setIsOpen && setIsOpen(false)}
-            className={({ isActive }) => (isActive ? "underline font-semibold" : "")}
-          >
-            Admin Dashboard
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/admin/services"
-            onClick={() => setIsOpen && setIsOpen(false)}
-            className={({ isActive }) => (isActive ? "underline font-semibold" : "")}
-          >
-            Services
-          </NavLink>
-        </li>
-      </>
-    )}
-
-    {user && user.role === "operator" && (
+  return (
+    <>
       <li>
         <NavLink
-          to="/operator"
+          to="/"
           onClick={() => setIsOpen && setIsOpen(false)}
           className={({ isActive }) => (isActive ? "underline font-semibold" : "")}
         >
-          Operator Panel
+          Home
         </NavLink>
       </li>
-    )}
 
-    {user && (
-      <>
-        <li>
-          <Link to="/profile" onClick={() => setIsOpen && setIsOpen(false)}>
-          {user.profilePic?.filename ? (
- 
-              <img
-               src={`http://localhost:5000/api/files/${user.profilePic.filename}`}
+      {!user && (
+        <>
+          <li>
+            <NavLink
+              to="/login"
+              onClick={() => setIsOpen && setIsOpen(false)}
+              className={({ isActive }) => (isActive ? "underline font-semibold" : "")}
+            >
+              Login
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/signup"
+              onClick={() => setIsOpen && setIsOpen(false)}
+              className={({ isActive }) => (isActive ? "underline font-semibold" : "")}
+            >
+              Signup
+            </NavLink>
+          </li>
+        </>
+      )}
 
-                alt="Profile"
-                className="w-10 h-10 rounded-full border-2 border-white object-cover"
-              />
-            ) : (
-              <div className="w-10 h-10 rounded-full bg-white text-pink-600 flex items-center justify-center font-bold">
-                {user.name ? user.name.charAt(0).toUpperCase() : "U"}
-              </div>
-            )}
-          </Link>
-        </li>
+      {user && user.role === "user" && (
+        <>
+          <li>
+            <NavLink
+              to="/user/dashboard"
+              onClick={() => setIsOpen && setIsOpen(false)}
+              className={({ isActive }) => (isActive ? "underline font-semibold" : "")}
+            >
+              Dashboard
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/application-form"
+              onClick={() => setIsOpen && setIsOpen(false)}
+              className={({ isActive }) => (isActive ? "underline font-semibold" : "")}
+            >
+              Apply Service
+            </NavLink>
+          </li>
+        </>
+      )}
+
+      {user && user.role === "admin" && (
+        <>
+          <li>
+            <NavLink
+              to="/admin"
+              onClick={() => setIsOpen && setIsOpen(false)}
+              className={({ isActive }) => (isActive ? "underline font-semibold" : "")}
+            >
+              Admin Dashboard
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/admin/services"
+              onClick={() => setIsOpen && setIsOpen(false)}
+              className={({ isActive }) => (isActive ? "underline font-semibold" : "")}
+            >
+              Services
+            </NavLink>
+          </li>
+        </>
+      )}
+
+      {user && user.role === "operator" && (
         <li>
-          <button
-            onClick={() => {
-              handleLogout();
-              setIsOpen && setIsOpen(false);
-            }}
-            className="bg-white text-pink-600 px-3 py-1 rounded hover:bg-pink-100"
+          <NavLink
+            to="/operator"
+            onClick={() => setIsOpen && setIsOpen(false)}
+            className={({ isActive }) => (isActive ? "underline font-semibold" : "")}
           >
-            Logout
-          </button>
+            Operator Panel
+          </NavLink>
         </li>
-      </>
-    )}
-  </>
-);
+      )}
+
+      {user && (
+        <>
+          <li>
+            <Link to="/profile" onClick={() => setIsOpen && setIsOpen(false)}>
+              {user.profilePic?.filename ? (
+                <img
+                  src={`${BASE_URL}/api/files/${user.profilePic.filename}`}
+                  alt="Profile"
+                  className="w-10 h-10 rounded-full border-2 border-white object-cover"
+                />
+              ) : (
+                <div className="w-10 h-10 rounded-full bg-white text-pink-600 flex items-center justify-center font-bold">
+                  {user.name ? user.name.charAt(0).toUpperCase() : "U"}
+                </div>
+              )}
+            </Link>
+          </li>
+          <li>
+            <button
+              onClick={() => {
+                handleLogout();
+                setIsOpen && setIsOpen(false);
+              }}
+              className="bg-white text-pink-600 px-3 py-1 rounded hover:bg-pink-100"
+            >
+              Logout
+            </button>
+          </li>
+        </>
+      )}
+    </>
+  );
+};
 
 export default Navbar;
-

@@ -1,7 +1,6 @@
-
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { MdOutlineAnnouncement } from "react-icons/md"; // optional icon (npm i react-icons)
+import { MdOutlineAnnouncement } from "react-icons/md";
 
 const NoticesSection = () => {
   const [notices, setNotices] = useState([]);
@@ -9,7 +8,7 @@ const NoticesSection = () => {
   useEffect(() => {
     const fetchNotices = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/notices");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/notices`);
         setNotices(res.data);
       } catch (error) {
         console.error("Failed to fetch notices", error);
